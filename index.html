@@ -1,44 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SnapEdit9</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #111;
-      color: white;
-    }
-    .box {
-      margin-top: 50px;
-    }
-    button {
-      padding: 10px 20px;
-      background: orange;
-      border: none;
-      color: black;
-      cursor: pointer;
-    }
-  </style>
+<title>Snap Editor</title>
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+  background:#111;
+  color:white;
+}
+
+img{
+  max-width:300px;
+  margin-top:20px;
+  border-radius:10px;
+}
+
+.controls{
+  margin-top:20px;
+}
+
+button{
+  margin:5px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-<h1>SnapEdit9</h1>
-<p>Edit Photos & Videos – Unlock All Features @ ₹9</p>
+<h2>📸 Snap Photo Editor</h2>
 
-<div class="box">
-  <input type="file" id="upload"><br><br>
-  <button onclick="edit()">Apply Filter</button>
-  <button onclick="unlock()">Unlock Pro ₹9</button>
+<input type="file" id="fileInput">
+
+<br>
+
+<img id="img">
+
+<div class="controls">
+<button onclick="bright()">Brightness+</button>
+<button onclick="dark()">Brightness-</button>
+<button onclick="contrast()">Contrast</button>
+<button onclick="blurImg()">Blur</button>
+<button onclick="gray()">Grayscale</button>
+<button onclick="reset()">Reset</button>
 </div>
 
 <script>
-function edit() {
-  alert("Basic Edit Applied!");
+let img = document.getElementById("img");
+
+document.getElementById("fileInput").addEventListener("change", function(e){
+  let file = e.target.files[0];
+  let reader = new FileReader();
+
+  reader.onload = function(){
+    img.src = reader.result;
+  }
+
+  if(file){
+    reader.readAsDataURL(file);
+  }
+});
+
+// filters
+function bright(){
+  img.style.filter = "brightness(150%)";
 }
 
-function unlock() {
-  alert("Redirecting to Payment...");
+function dark(){
+  img.style.filter = "brightness(70%)";
+}
+
+function contrast(){
+  img.style.filter = "contrast(200%)";
+}
+
+function blurImg(){
+  img.style.filter = "blur(2px)";
+}
+
+function gray(){
+  img.style.filter = "grayscale(100%)";
+}
+
+function reset(){
+  img.style.filter = "none";
 }
 </script>
 
